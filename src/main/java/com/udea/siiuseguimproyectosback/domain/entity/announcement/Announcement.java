@@ -1,36 +1,45 @@
 package com.udea.siiuseguimproyectosback.domain.entity.announcement;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GenerationType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.Date;
+
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
- * Represents an Announcement entity mapped to the "SIIU_CONVOCATORIA" table in the database.
+ * Represents an Announcement entity mapped to the "SIIU_CONVOCATORIA" table in
+ * the database.
  * <p>
- * This entity stores all relevant data regarding project announcements, including identification details,
- * important dates, project constraints, and budget management configurations.
- * It is used to manage the lifecycle of calls for research or project proposals in the system.
+ * This entity stores all relevant data regarding project announcements,
+ * including identification details, important dates, project constraints, and
+ * budget management configurations. It is used to manage the lifecycle of calls
+ * for research or project proposals in the system.
  * </p>
  *
- * <p>Key Features:</p>
+ * <p>
+ * Key Features:
+ * </p>
  * <ul>
- *     <li>Contains essential metadata like creation date, publication date, and closing date.</li>
- *     <li>Defines constraints for project execution timelines, such as maximum extensions or suspensions.</li>
- *     <li>Supports additional descriptive fields such as URL links, comments, and short names for clarity.</li>
- *     <li>Includes fields for managing the budgeting period and total budget periods.</li>
+ * <li>Contains essential metadata like creation date, publication date, and
+ * closing date.</li>
+ * <li>Defines constraints for project execution timelines, such as maximum
+ * extensions or suspensions.</li>
+ * <li>Supports additional descriptive fields such as URL links, comments, and
+ * short names for clarity.</li>
+ * <li>Includes fields for managing the budgeting period and total budget
+ * periods.</li>
  * </ul>
  *
  * <p>
- * This entity is designed to be immutable for key fields like {@code id} after creation to ensure data integrity.
+ * This entity is designed to be immutable for key fields like {@code id} after
+ * creation to ensure data integrity.
  * </p>
  */
 @Data
@@ -39,152 +48,163 @@ import java.util.Date;
 @Table(name = "SIIU_CONVOCATORIA")
 public class Announcement {
 
-    /** Unique identifier for the announcement. */
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "IDENTIFICADOR", nullable = false, updatable = false)
-    private Long id;
+	/** Unique identifier for the announcement. */
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "IDENTIFICADOR", nullable = true, updatable = false)
+	private Long id;
 
-    /** Code of the financier providing the funds for the announcement. */
-    @NotNull
-    @Size(max = 20)
-    @Column(name = "CODIGO_FINANCIADOR", length = 20)
-    private String financierCode;
+	/** Code of the financier providing the funds for the announcement. */
 
-    /** Reference to the selection process used for the projects in the announcement. */
-    @NotNull
-    @Column(name = "PROCESO_SELECCION", nullable = false)
-    private Integer selectionProcess;
+	@Size(max = 20)
+	@Column(name = "CODIGO_FINANCIADOR", length = 20)
+	private String financierCode;
 
-    /** Reference to the person or entity who registered the announcement. */
-    @NotNull
-    @Size(max = 16)
-    @Column(name = "REGISTRADOR", nullable = false, length = 16)
-    private String registrar;
+	/**
+	 * Reference to the selection process used for the projects in the announcement.
+	 */
 
-    /** Date when the announcement was created. */
-    @NotNull
-    @Column(name = "FECHA_CREACION", nullable = false)
-    private Date creationDate;
+	@Column(name = "PROCESO_SELECCION", nullable = true)
+	private Integer selectionProcess;
 
-    /** Date when the announcement was published. */
-    @Column(name = "FECHA_PUBLICACION")
-    private Date publicationDate;
+	/** Reference to the person or entity who registered the announcement. */
 
-    /** Date of the last modification made to the announcement. */
-    @NotNull
-    @Column(name = "FECHA_ULTIMO_CAMBIO", nullable = false)
-    private Date lastModifiedDate;
+	@Size(max = 16)
+	@Column(name = "REGISTRADOR", nullable = true, length = 16)
+	private String registrar;
 
-    /** Date when the announcement closes for project submissions. */
-    @Column(name = "FECHA_CIERRE")
-    private Date closingDate;
+	/** Date when the announcement was created. */
 
-    /** Date when the announcement opens for project submissions. */
-    @Column(name = "FECHA_APERTURA")
-    private Date openingDate;
+	@Column(name = "FECHA_CREACION", nullable = true)
+	private Date creationDate;
 
-    /** Date when the results of the announcement are published. */
-    @Column(name = "FECHA_RESULTADOS")
-    private Date resultsDate;
+	/** Date when the announcement was published. */
+	@Column(name = "FECHA_PUBLICACION")
+	private Date publicationDate;
 
-    /** Full name of the announcement. */
-    @NotNull
-    @Size(max = 400)
-    @Column(name = "NOMBRE", length = 400, nullable = false)
-    private String name;
+	/** Date of the last modification made to the announcement. */
 
-    /** Short name of the announcement. */
-    @NotNull
-    @Size(max = 100)
-    @Column(name = "NOMBRE_CORTO", length = 100)
-    private String shortName;
+	@Column(name = "FECHA_ULTIMO_CAMBIO", nullable = true)
+	private Date lastModifiedDate;
 
-    /** Description or purpose of the announcement. */
-    @NotNull
-    @Size(max = 400)
-    @Column(name = "OBJETO_DESCRIPCION", length = 4000, nullable = false)
-    private String description;
+	/** Date when the announcement closes for project submissions. */
+	@Column(name = "FECHA_CIERRE")
+	private Date closingDate;
 
-    /** Additional comments or notes regarding the announcement. */
-    @Column(name = "COMENTARIO")
-    private String comment;
+	/** Date when the announcement opens for project submissions. */
+	@Column(name = "FECHA_APERTURA")
+	private Date openingDate;
 
-    /** URL with additional details about the announcement. */
-    @Size(max = 1000)
-    @Column(name = "URL_DETALLE", length = 1000)
-    private String detailUrl;
+	/** Date when the results of the announcement are published. */
+	@Column(name = "FECHA_RESULTADOS")
+	private Date resultsDate;
 
-    /** Type of budget period for projects (e.g., month, year, or all). */
-    @NotNull
-    @Size(max = 5)
-    @Column(name = "PERIODO_PRESUPUESTO", length = 5, nullable = false)
-    private String budgetPeriodType;
+	/** Full name of the announcement. */
 
-    /** Total number of budget periods for the announcement. */
-    @NotNull
-    @Column(name = "TOTAL_PERIODOS_PRESUPUESTO", nullable = false)
-    private Integer totalBudgetPeriods;
+	@Size(max = 400)
+	@Column(name = "NOMBRE", length = 400, nullable = true)
+	private String name;
 
-    /** Start date for the budget period in the announcement. */
-    @NotNull
-    @Column(name = "INICIO_PERIODO_PRESUPUESTO", nullable = false)
-    private Date budgetStartDate;
+	/** Short name of the announcement. */
 
-    /** Selector for the type of registrar person. */
-    @NotNull
-    @Size(max = 1)
-    @Column(name = "SELECTOR_REGISTRADOR", length = 1, nullable = false)
-    private String registrarType;
+	@Size(max = 100)
+	@Column(name = "NOMBRE_CORTO", length = 100)
+	private String shortName;
 
-    /** Maximum months allowed for formal project initiation. */
-    @NotNull
-    @Column(name = "MAX_INICIO_FORMAL", nullable = false)
-    private Integer maxFormalStart;
+	/** Description or purpose of the announcement. */
 
-    /** Maximum months allowed for extending the formal start of approved projects. */
-    @NotNull
-    @Column(name = "MAX_PRORROGA_INI_FORMAL", nullable = false)
-    private Integer maxExtensionFormalStart;
+	@Size(max = 400)
+	@Column(name = "OBJETO_DESCRIPCION", length = 4000, nullable = true)
+	private String description;
 
-    /** Maximum months allowed for extending the execution period of a project. */
-    @NotNull
-    @Column(name = "MAX_PRORROGA_EJECUCION", nullable = false)
-    private Integer maxExecutionExtension;
+	/** Additional comments or notes regarding the announcement. */
+	@Column(name = "COMENTARIO")
+	private String comment;
 
-    /** Indicator for allowing project execution to start with NN values ('YES' or 'NO'). */
-    @NotNull
-    @Size(max = 2)
-    @Column(name = "INICIO_CON_NN", length = 2)
-    private String allowExecutionWithNN;
+	/** URL with additional details about the announcement. */
+	@Size(max = 1000)
+	@Column(name = "URL_DETALLE", length = 1000)
+	private String detailUrl;
 
-    /** Time limit (in months) for suspending a project before its termination date. */
-    @NotNull
-    @Column(name = "TIEMPO_PARA_SUSPENDER", nullable = false)
-    private Integer suspensionTimeLimit;
+	/** Type of budget period for projects (e.g., month, year, or all). */
 
-    /** Time limit (in months) for cancelling a project before its termination date. */
-    @NotNull
-    @Column(name = "TIEMPO_PARA_CANCELAR", nullable = false)
-    private Integer cancellationTimeLimit;
+	@Size(max = 5)
+	@Column(name = "PERIODO_PRESUPUESTO", length = 5, nullable = true)
+	private String budgetPeriodType;
 
-    /** Maximum time (in months) allowed for partial delivery commitments. */
-    @NotNull
-    @Column(name = "MAX_TIE_ENT_COMPRO", nullable = false)
-    private Integer maxPartialDeliveryTime;
+	/** Total number of budget periods for the announcement. */
 
-    /** Maximum time (in months) for postponement of commitments. */
-    @NotNull
-    @Column(name = "MAX_TIE_APLAZ_COMPRO", nullable = false)
-    private Integer maxCommitmentPostponementTime;
+	@Column(name = "TOTAL_PERIODOS_PRESUPUESTO", nullable = true)
+	private Integer totalBudgetPeriods;
 
-    /** Maximum eligible time (in months) for project execution. */
-    @NotNull
-    @Column(name = "MAX_TIEMPO_ELEGIBLE", nullable = false)
-    private Integer maxEligibleTime;
+	/** Start date for the budget period in the announcement. */
 
-    /** Name of the survey applied during the project call process. */
-    @Size(max = 100)
-    @Column(name = "NOMBRE_ENCUESTA", length = 100)
-    private String surveyName;
+	@Column(name = "INICIO_PERIODO_PRESUPUESTO", nullable = true)
+	private Date budgetStartDate;
+
+	/** Selector for the type of registrar person. */
+
+	@Size(max = 1)
+	@Column(name = "SELECTOR_REGISTRADOR", length = 1, nullable = true)
+	private String registrarType;
+
+	/** Maximum months allowed for formal project initiation. */
+
+	@Column(name = "MAX_INICIO_FORMAL", nullable = true)
+	private Integer maxFormalStart;
+
+	/**
+	 * Maximum months allowed for extending the formal start of approved projects.
+	 */
+
+	@Column(name = "MAX_PRORROGA_INI_FORMAL", nullable = true)
+	private Integer maxExtensionFormalStart;
+
+	/** Maximum months allowed for extending the execution period of a project. */
+
+	@Column(name = "MAX_PRORROGA_EJECUCION", nullable = true)
+	private Integer maxExecutionExtension;
+
+	/**
+	 * Indicator for allowing project execution to start with NN values ('YES' or
+	 * 'NO').
+	 */
+
+	@Size(max = 2)
+	@Column(name = "INICIO_CON_NN", length = 2)
+	private String allowExecutionWithNN;
+
+	/**
+	 * Time limit (in months) for suspending a project before its termination date.
+	 */
+
+	@Column(name = "TIEMPO_PARA_SUSPENDER", nullable = true)
+	private Integer suspensionTimeLimit;
+
+	/**
+	 * Time limit (in months) for cancelling a project before its termination date.
+	 */
+
+	@Column(name = "TIEMPO_PARA_CANCELAR", nullable = true)
+	private Integer cancellationTimeLimit;
+
+	/** Maximum time (in months) allowed for partial delivery commitments. */
+
+	@Column(name = "MAX_TIE_ENT_COMPRO", nullable = true)
+	private Integer maxPartialDeliveryTime;
+
+	/** Maximum time (in months) for postponement of commitments. */
+
+	@Column(name = "MAX_TIE_APLAZ_COMPRO", nullable = true)
+	private Integer maxCommitmentPostponementTime;
+
+	/** Maximum eligible time (in months) for project execution. */
+
+	@Column(name = "MAX_TIEMPO_ELEGIBLE", nullable = true)
+	private Integer maxEligibleTime;
+
+	/** Name of the survey applied during the project call process. */
+	@Size(max = 100)
+	@Column(name = "NOMBRE_ENCUESTA", length = 100)
+	private String surveyName;
 }

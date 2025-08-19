@@ -18,15 +18,15 @@ public class ProjectParticipant {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "IDENTIFICADOR", nullable = false, updatable = false)
+    @Column(name = "IDENTIFICADOR", nullable = true, updatable = false)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "PROYECTO", referencedColumnName = "CODIGO")
+    @JoinColumn(name = "PROYECTO", referencedColumnName = "CODIGO", nullable = true)
     private Project project;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "PERSONA_NATURAL", referencedColumnName = "IDENTIFICACION")
+    @JoinColumn(name = "PERSONA_NATURAL", referencedColumnName = "IDENTIFICACION", nullable = true)
     private Person responsible;
 
     @Size(max = 1)
@@ -63,7 +63,7 @@ public class ProjectParticipant {
     @Column(name = "FECHA_FIN")
     private Date endDate;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY, orphanRemoval = true)
     @JoinColumn(name = "ROL_PARTICIPANTE_PROYECTO", referencedColumnName = "IDENTIFICADOR")
     private List<ProjectParticipantRol> projectParticipantRole;
 

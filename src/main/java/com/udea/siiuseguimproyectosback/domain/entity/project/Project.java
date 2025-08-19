@@ -78,7 +78,7 @@ public class Project {
      */
     @Id
     @Size(max = 20)
-    @Column(name = "CODIGO", nullable = false, length = 20)
+    @Column(name = "CODIGO", nullable = true, length = 20)
     private String code;
 
     /**
@@ -88,7 +88,7 @@ public class Project {
      * The relationship is mapped by the "project" field in the {@link ProjectParticipant} entity.
      * </p>
      */
-    @OneToMany(mappedBy = "project", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "project", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ProjectParticipant> participants;
 
     /**
@@ -100,7 +100,7 @@ public class Project {
      * </p>
      */
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "CONVOCATORIA", referencedColumnName = "IDENTIFICADOR")
+    @JoinColumn(name = "CONVOCATORIA", referencedColumnName = "IDENTIFICADOR", nullable = true)
     private Announcement announcement;
 
     /**
@@ -121,7 +121,7 @@ public class Project {
      * </p>
      */
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "PROCESO_SELECCION", referencedColumnName = "IDENTIFICADOR")
+    @JoinColumn(name = "PROCESO_SELECCION", referencedColumnName = "IDENTIFICADOR", nullable = true)
     private SelectionProcess selectionProcess;
 
     /**
@@ -133,7 +133,7 @@ public class Project {
      * </p>
      */
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "SUBTIPO_PROYECTO", referencedColumnName = "IDENTIFICADOR")
+    @JoinColumn(name = "SUBTIPO_PROYECTO", referencedColumnName = "IDENTIFICADOR", nullable = true)
     private ProjectSubType projectSubtype;
 
     /**
@@ -181,7 +181,7 @@ public class Project {
      * </p>
      */
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "RESPONSABLE", referencedColumnName = "IDENTIFICACION")
+    @JoinColumn(name = "RESPONSABLE", referencedColumnName = "IDENTIFICACION", nullable = true)
     private Person responsible;
 
     /**
@@ -192,7 +192,7 @@ public class Project {
      */
     @NotNull
     @Size(max = 1)
-    @Column(name = "SELECTOR_RESPONSABLE", nullable = false, length = 1)
+    @Column(name = "SELECTOR_RESPONSABLE", nullable = true, length = 1)
     private String responsibleSelector;
 
     /**
@@ -223,7 +223,7 @@ public class Project {
      */
     @NotNull
     @Size(max = 31)
-    @Column(name = "ESTADO", nullable = false, length = 31)
+    @Column(name = "ESTADO", nullable = true, length = 31)
     private String status;
 
     /**
@@ -242,7 +242,7 @@ public class Project {
      * </p>
      */
     @NotNull
-    @Column(name = "FECHA_REGISTRO", nullable = false)
+    @Column(name = "FECHA_REGISTRO", nullable = true)
     private LocalDate registrationDate;
 
     /**
@@ -253,7 +253,7 @@ public class Project {
      */
     @NotNull
     @Size(max = 200)
-    @Column(name = "NOMBRE_CORTO", nullable = false, length = 200)
+    @Column(name = "NOMBRE_CORTO", nullable = true, length = 200)
     private String shortName;
 
     /**
@@ -264,7 +264,7 @@ public class Project {
      */
     @NotNull
     @Size(max = 200)
-    @Column(name = "NOMBRE_COMPLETO", nullable = false, length = 200)
+    @Column(name = "NOMBRE_COMPLETO", nullable = true, length = 200)
     private String fullName;
 
     /**
@@ -275,7 +275,7 @@ public class Project {
      */
     @NotNull
     @Size(max = 200)
-    @Column(name = "PALABRAS_CLAVES", nullable = false, length = 200)
+    @Column(name = "PALABRAS_CLAVES", nullable = true, length = 200)
     private String keywords;
 
     /**
@@ -285,7 +285,7 @@ public class Project {
      * </p>
      */
     @NotNull
-    @Column(name = "DURACION", nullable = false)
+    @Column(name = "DURACION", nullable = true)
     private Integer duration;
 
     /**
@@ -296,7 +296,7 @@ public class Project {
      */
     @NotNull
     @Size(max = 100)
-    @Column(name = "LUGAR_EJECUCION", nullable = false, length = 100)
+    @Column(name = "LUGAR_EJECUCION", nullable = true, length = 100)
     private String executionPlace;
 
     /**
@@ -307,7 +307,7 @@ public class Project {
      */
     @NotNull
     @Size(max = 3)
-    @Column(name = "MONEDA", nullable = false, length = 3)
+    @Column(name = "MONEDA", nullable = true, length = 3)
     private String currency;
 
     /**
@@ -317,7 +317,7 @@ public class Project {
      * </p>
      */
     @NotNull
-    @Column(name = "PENDIENTE_AJUSTE_PPTO", nullable = false)
+    @Column(name = "PENDIENTE_AJUSTE_PPTO", nullable = true)
     private Integer pendingBudgetAdjustment;
 
     /**
@@ -347,7 +347,7 @@ public class Project {
      * </p>
      */
     @NotNull
-    @Column(name = "ES_ELEGIBLE_JURADO", nullable = false)
+    @Column(name = "ES_ELEGIBLE_JURADO", nullable = true)
     private Integer isJuryEligible;
 
     /**
@@ -377,7 +377,7 @@ public class Project {
      * </p>
      */
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "SUBNIVEL_PROYECTO", referencedColumnName = "SUBNIVEL_PROYECTO")
+    @JoinColumn(name = "SUBNIVEL_PROYECTO", referencedColumnName = "SUBNIVEL_PROYECTO", nullable = true)
     private ProjectSubLevel projectSubLevel;
 
     /**

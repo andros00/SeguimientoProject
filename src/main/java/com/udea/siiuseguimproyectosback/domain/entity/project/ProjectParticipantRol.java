@@ -15,11 +15,11 @@ public class ProjectParticipantRol {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "IDENTIFICADOR", nullable = false, updatable = false)
+    @Column(name = "IDENTIFICADOR", nullable = true, updatable = false)
     private Long id;
 
     @Size(max = 60)
-    @Column(name = "NOMBRE", nullable = false)
+    @Column(name = "NOMBRE", nullable = true)
     private String name;
 
     @ManyToOne(fetch = FetchType.LAZY)
