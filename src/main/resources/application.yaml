@@ -31,4 +31,8 @@ logging:
 
 springdoc:
   packages-to-scan: "package1, package2, com.udea.siiuseguimproyectosback"
-  paths-to-match: "/v1, /api/balance/**, *, **, /*, /**"
+  paths-to-match: "/v1, /api/balance/**, *, **, /*, /**"  
+  swagger-ui:
+    path: "/swagger-ui"
+    api-docs:
+      path: "/api-docs"

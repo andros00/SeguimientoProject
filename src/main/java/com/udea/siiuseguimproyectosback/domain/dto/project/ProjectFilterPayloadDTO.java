@@ -1,8 +1,7 @@
 package com.udea.siiuseguimproyectosback.domain.dto.project;
 
+import lombok.Builder;
 import lombok.Data;
-
-import javax.validation.constraints.NotNull;
 
 /**
  * Data Transfer Object (DTO) for filtering projects based on multiple criteria.
@@ -12,6 +11,7 @@ import javax.validation.constraints.NotNull;
  * between the client and the backend services.
  */
 @Data
+@Builder
 public class ProjectFilterPayloadDTO {
 
     /**
