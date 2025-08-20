@@ -21,11 +21,11 @@ public class ProjectParticipant {
     @Column(name = "IDENTIFICADOR", nullable = true, updatable = false)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, optional = true)
     @JoinColumn(name = "PROYECTO", referencedColumnName = "CODIGO", nullable = true)
     private Project project;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, optional = true)
     @JoinColumn(name = "PERSONA_NATURAL", referencedColumnName = "IDENTIFICACION", nullable = true)
     private Person responsible;
 

@@ -99,7 +99,7 @@ public class Project {
      * in the {@link Announcement} table.
      * </p>
      */
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, optional = true)
     @JoinColumn(name = "CONVOCATORIA", referencedColumnName = "IDENTIFICADOR", nullable = true)
     private Announcement announcement;
 
@@ -120,7 +120,7 @@ public class Project {
      * in the {@link SelectionProcess} table.
      * </p>
      */
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, optional = true)
     @JoinColumn(name = "PROCESO_SELECCION", referencedColumnName = "IDENTIFICADOR", nullable = true)
     private SelectionProcess selectionProcess;
 
@@ -132,7 +132,7 @@ public class Project {
      * in the {@link ProjectSubType} table.
      * </p>
      */
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, optional = true)
     @JoinColumn(name = "SUBTIPO_PROYECTO", referencedColumnName = "IDENTIFICADOR", nullable = true)
     private ProjectSubType projectSubtype;
 
@@ -180,7 +180,7 @@ public class Project {
      * in the {@link Person} table.
      * </p>
      */
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, optional = true)
     @JoinColumn(name = "RESPONSABLE", referencedColumnName = "IDENTIFICACION", nullable = true)
     private Person responsible;
 
@@ -376,7 +376,7 @@ public class Project {
      * in the {@link ProjectSubLevel} table.
      * </p>
      */
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, optional = true)
     @JoinColumn(name = "SUBNIVEL_PROYECTO", referencedColumnName = "SUBNIVEL_PROYECTO", nullable = true)
     private ProjectSubLevel projectSubLevel;
 

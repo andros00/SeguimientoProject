@@ -32,7 +32,7 @@ public class ProjectSubType {
     @Column(name = "NOMBRE", nullable = false, length = 200)
     private String name;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, optional = true)
     @JoinColumn(name = "TIPO_PROYECTO", referencedColumnName = "IDENTIFICADOR", nullable = true)
     private ProjectType projectType;
 
