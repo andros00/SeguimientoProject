@@ -68,11 +68,11 @@ public interface IProjectRepository extends JpaRepository<Project, String> {
      * @return a list of {@link Project} entities that match the given filters.
      * @see Pageable
      */
-	@Query(value = "SELECT p.* FROM PROJECT p " +
-            "LEFT JOIN ANNOUNCEMENT a ON p.announcement_id = a.id " +
-            "LEFT JOIN SELECTION_PROCESS sp ON p.selection_process_id = sp.id " +
-            "LEFT JOIN PROJECT_SUBTYPE ps ON p.project_subtype_id = ps.id " +
-            "LEFT JOIN PROJECT_TYPE pt ON ps.project_type_id = pt.id " +
+	@Query(value = "SELECT p.* FROM SIIU_PROYECTO p " +
+            "LEFT JOIN SIIU_CONVOCATORIA a ON p.announcement_id = a.id " +
+            "LEFT JOIN SIIU_PROCESO_SELECCION sp ON p.selection_process_id = sp.id " +
+            "LEFT JOIN SIIU_SUBTIPO_PROYECTO ps ON p.project_subtype_id = ps.id " +
+            "LEFT JOIN SIIU_TIPO_PROYECTO pt ON ps.project_type_id = pt.id " +
             "WHERE p.administrative_center = :administrativeCenterId " +
             "AND (:projectCode IS NULL OR p.code = :projectCode) " +
             "AND (:status IS NULL OR p.status = :status) " +
@@ -80,11 +80,11 @@ public interface IProjectRepository extends JpaRepository<Project, String> {
             "AND (:selectionProcessId IS NULL OR sp.id = :selectionProcessId) " +
             "AND (:projectTypeId IS NULL OR pt.id = :projectTypeId) " +
             "AND p.responsible_id = :responsible",
-    countQuery = "SELECT COUNT(*) FROM PROJECT p " +
-            "LEFT JOIN ANNOUNCEMENT a ON p.announcement_id = a.id " +
-            "LEFT JOIN SELECTION_PROCESS sp ON p.selection_process_id = sp.id " +
-            "LEFT JOIN PROJECT_SUBTYPE ps ON p.project_subtype_id = ps.id " +
-            "LEFT JOIN PROJECT_TYPE pt ON ps.project_type_id = pt.id " +
+    countQuery = "SELECT COUNT(*) FROM SIIU_PROYECTO p " +
+            "LEFT JOIN SIIU_CONVOCATORIA a ON p.announcement_id = a.id " +
+            "LEFT JOIN SIIU_PROCESO_SELECCION sp ON p.selection_process_id = sp.id " +
+            "LEFT JOIN SIIU_SUBTIPO_PROYECTO ps ON p.project_subtype_id = ps.id " +
+            "LEFT JOIN SIIU_TIPO_PROYECTO pt ON ps.project_type_id = pt.id " +
             "WHERE p.administrative_center = :administrativeCenterId " +
             "AND (:projectCode IS NULL OR p.code = :projectCode) " +
             "AND (:status IS NULL OR p.status = :status) " +
