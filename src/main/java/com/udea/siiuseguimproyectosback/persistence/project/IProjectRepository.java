@@ -68,18 +68,31 @@ public interface IProjectRepository extends JpaRepository<Project, String> {
      * @return a list of {@link Project} entities that match the given filters.
      * @see Pageable
      */
-	@Query("SELECT p FROM Project p " +
-		       "LEFT JOIN p.announcement a " +
-		       "LEFT JOIN p.selectionProcess sp " +
-		       "LEFT JOIN p.projectSubtype ps " +
-		       "LEFT JOIN ps.projectType pt " +
-		       "WHERE p.administrativeCenter = :administrativeCenterId " +
-		       "AND (:projectCode IS NULL OR p.code = :projectCode) " +
-		       "AND (:status IS NULL OR p.status = :status) " +
-		       "AND (a IS NULL OR :announcementId IS NULL OR a.id = :announcementId) " +
-		       "AND (sp IS NULL OR :selectionProcessId IS NULL OR sp.id = :selectionProcessId) " +
-		       "AND (pt IS NULL OR :projectTypeId IS NULL OR pt.id = :projectTypeId) " +
-		       "AND p.responsible.id = :responsible")
+	@Query(value = "SELECT p.* FROM PROJECT p " +
+            "LEFT JOIN ANNOUNCEMENT a ON p.announcement_id = a.id " +
+            "LEFT JOIN SELECTION_PROCESS sp ON p.selection_process_id = sp.id " +
+            "LEFT JOIN PROJECT_SUBTYPE ps ON p.project_subtype_id = ps.id " +
+            "LEFT JOIN PROJECT_TYPE pt ON ps.project_type_id = pt.id " +
+            "WHERE p.administrative_center = :administrativeCenterId " +
+            "AND (:projectCode IS NULL OR p.code = :projectCode) " +
+            "AND (:status IS NULL OR p.status = :status) " +
+            "AND (:announcementId IS NULL OR a.id = :announcementId) " +
+            "AND (:selectionProcessId IS NULL OR sp.id = :selectionProcessId) " +
+            "AND (:projectTypeId IS NULL OR pt.id = :projectTypeId) " +
+            "AND p.responsible_id = :responsible",
+    countQuery = "SELECT COUNT(*) FROM PROJECT p " +
+            "LEFT JOIN ANNOUNCEMENT a ON p.announcement_id = a.id " +
+            "LEFT JOIN SELECTION_PROCESS sp ON p.selection_process_id = sp.id " +
+            "LEFT JOIN PROJECT_SUBTYPE ps ON p.project_subtype_id = ps.id " +
+            "LEFT JOIN PROJECT_TYPE pt ON ps.project_type_id = pt.id " +
+            "WHERE p.administrative_center = :administrativeCenterId " +
+            "AND (:projectCode IS NULL OR p.code = :projectCode) " +
+            "AND (:status IS NULL OR p.status = :status) " +
+            "AND (:announcementId IS NULL OR a.id = :announcementId) " +
+            "AND (:selectionProcessId IS NULL OR sp.id = :selectionProcessId) " +
+            "AND (:projectTypeId IS NULL OR pt.id = :projectTypeId) " +
+            "AND p.responsible_id = :responsible",
+    nativeQuery = true)
     Page<Project> findByFilters(
             @Param("responsible") String responsible,
             @Param("administrativeCenterId") Long administrativeCenterId,
