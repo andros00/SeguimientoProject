@@ -69,29 +69,29 @@ public interface IProjectRepository extends JpaRepository<Project, String> {
      * @see Pageable
      */
 	@Query(value = "SELECT p.* FROM SIIU_PROYECTO p " +
-            "LEFT JOIN SIIU_CONVOCATORIA a ON p.announcement_id = a.id " +
-            "LEFT JOIN SIIU_PROCESO_SELECCION sp ON p.selection_process_id = sp.id " +
-            "LEFT JOIN SIIU_SUBTIPO_PROYECTO ps ON p.project_subtype_id = ps.id " +
-            "LEFT JOIN SIIU_TIPO_PROYECTO pt ON ps.project_type_id = pt.id " +
-            "WHERE p.administrative_center = :administrativeCenterId " +
-            "AND (:projectCode IS NULL OR p.code = :projectCode) " +
-            "AND (:status IS NULL OR p.status = :status) " +
-            "AND (:announcementId IS NULL OR a.id = :announcementId) " +
-            "AND (:selectionProcessId IS NULL OR sp.id = :selectionProcessId) " +
-            "AND (:projectTypeId IS NULL OR pt.id = :projectTypeId) " +
-            "AND p.responsible_id = :responsible",
+            "LEFT JOIN SIIU_CONVOCATORIA a ON p.convocatoria = a.identificador " +
+            "LEFT JOIN SIIU_PROCESO_SELECCION sp ON p.proceso_seleccion = sp.identificador " +
+            "LEFT JOIN SIIU_SUBTIPO_PROYECTO ps ON p.subtipo_proyecto = ps.identificador " +
+            "LEFT JOIN SIIU_TIPO_PROYECTO pt ON ps.tipo_proyecto = pt.identificador " +
+            "WHERE p.centro_gestion = :administrativeCenterId " +
+            "AND (:projectCode IS NULL OR p.codigo = :projectCode) " +
+            "AND (:status IS NULL OR p.estado = :status) " +
+            "AND (:announcementId IS NULL OR a.identificador = :announcementId) " +
+            "AND (:selectionProcessId IS NULL OR sp.identificador = :selectionProcessId) " +
+            "AND (:projectTypeId IS NULL OR pt.identificador = :projectTypeId) " +
+            "AND p.responsable = :responsible",
     countQuery = "SELECT COUNT(*) FROM SIIU_PROYECTO p " +
-            "LEFT JOIN SIIU_CONVOCATORIA a ON p.announcement_id = a.id " +
-            "LEFT JOIN SIIU_PROCESO_SELECCION sp ON p.selection_process_id = sp.id " +
-            "LEFT JOIN SIIU_SUBTIPO_PROYECTO ps ON p.project_subtype_id = ps.id " +
-            "LEFT JOIN SIIU_TIPO_PROYECTO pt ON ps.project_type_id = pt.id " +
-            "WHERE p.administrative_center = :administrativeCenterId " +
-            "AND (:projectCode IS NULL OR p.code = :projectCode) " +
-            "AND (:status IS NULL OR p.status = :status) " +
-            "AND (:announcementId IS NULL OR a.id = :announcementId) " +
-            "AND (:selectionProcessId IS NULL OR sp.id = :selectionProcessId) " +
-            "AND (:projectTypeId IS NULL OR pt.id = :projectTypeId) " +
-            "AND p.responsible_id = :responsible",
+            "LEFT JOIN SIIU_CONVOCATORIA a ON p.convocatoria = a.identificador " +
+            "LEFT JOIN SIIU_PROCESO_SELECCION sp ON p.proceso_seleccion = sp.identificador " +
+            "LEFT JOIN SIIU_SUBTIPO_PROYECTO ps ON p.subtipo_proyecto = ps.identificador " +
+            "LEFT JOIN SIIU_TIPO_PROYECTO pt ON ps.tipo_proyecto = pt.identificador " +
+            "WHERE p.centro_gestion = :administrativeCenterId " +
+            "AND (:projectCode IS NULL OR p.codigo = :projectCode) " +
+            "AND (:status IS NULL OR p.estado = :status) " +
+            "AND (:announcementId IS NULL OR a.identificador = :announcementId) " +
+            "AND (:selectionProcessId IS NULL OR sp.identificador = :selectionProcessId) " +
+            "AND (:projectTypeId IS NULL OR pt.identificador = :projectTypeId) " +
+            "AND p.responsable_id = :responsible",
     nativeQuery = true)
     Page<Project> findByFilters(
             @Param("responsible") String responsible,
