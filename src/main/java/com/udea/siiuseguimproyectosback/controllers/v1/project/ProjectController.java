@@ -24,7 +24,6 @@ public class ProjectController {
 	private final Session session;
 	private final HttpServletRequest request;
 
-	@Autowired
 	public ProjectController(IProjectService projectService, Session session, HttpServletRequest request) {
 		this.projectService = projectService;
 		this.session = session;
