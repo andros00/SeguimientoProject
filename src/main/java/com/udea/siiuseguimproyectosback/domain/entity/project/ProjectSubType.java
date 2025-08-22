@@ -13,6 +13,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -34,6 +37,7 @@ public class ProjectSubType {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = true)
     @JoinColumn(name = "TIPO_PROYECTO", referencedColumnName = "IDENTIFICADOR", nullable = true)
+    @NotFound(action = NotFoundAction.IGNORE)
     private ProjectType projectType;
 
     @Column(name = "DESCRIPCION")

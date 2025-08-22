@@ -1,6 +1,10 @@
 package com.udea.siiuseguimproyectosback.domain.entity.project;
 
 import com.udea.siiuseguimproyectosback.domain.entity.user.Person;
+
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -23,10 +27,12 @@ public class ProjectParticipant {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = true)
     @JoinColumn(name = "PROYECTO", referencedColumnName = "CODIGO", nullable = true)
+    @NotFound(action = NotFoundAction.IGNORE)
     private Project project;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = true)
     @JoinColumn(name = "PERSONA_NATURAL", referencedColumnName = "IDENTIFICACION", nullable = true)
+    @NotFound(action = NotFoundAction.IGNORE)
     private Person responsible;
 
     @Size(max = 1)
@@ -65,6 +71,7 @@ public class ProjectParticipant {
 
     @OneToMany(fetch = FetchType.LAZY, orphanRemoval = true)
     @JoinColumn(name = "ROL_PARTICIPANTE_PROYECTO", referencedColumnName = "IDENTIFICADOR")
+    @NotFound(action = NotFoundAction.IGNORE)
     private List<ProjectParticipantRol> projectParticipantRole;
 
     @Column(name = "INSTITUCION")

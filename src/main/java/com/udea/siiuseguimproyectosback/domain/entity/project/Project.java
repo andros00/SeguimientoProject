@@ -2,6 +2,10 @@ package com.udea.siiuseguimproyectosback.domain.entity.project;
 
 import com.udea.siiuseguimproyectosback.domain.entity.announcement.Announcement;
 import com.udea.siiuseguimproyectosback.domain.entity.user.Person;
+
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -89,6 +93,7 @@ public class Project {
      * </p>
      */
     @OneToMany(mappedBy = "project", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @NotFound(action = NotFoundAction.IGNORE)
     private List<ProjectParticipant> participants;
 
     /**
@@ -101,6 +106,7 @@ public class Project {
      */
     @ManyToOne(fetch = FetchType.LAZY, optional = true)
     @JoinColumn(name = "CONVOCATORIA", referencedColumnName = "IDENTIFICADOR", nullable = true)
+    @NotFound(action = NotFoundAction.IGNORE)
     private Announcement announcement;
 
     /**
@@ -122,6 +128,7 @@ public class Project {
      */
     @ManyToOne(fetch = FetchType.LAZY, optional = true)
     @JoinColumn(name = "PROCESO_SELECCION", referencedColumnName = "IDENTIFICADOR", nullable = true)
+    @NotFound(action = NotFoundAction.IGNORE)
     private SelectionProcess selectionProcess;
 
     /**
@@ -134,6 +141,7 @@ public class Project {
      */
     @ManyToOne(fetch = FetchType.LAZY, optional = true)
     @JoinColumn(name = "SUBTIPO_PROYECTO", referencedColumnName = "IDENTIFICADOR", nullable = true)
+    @NotFound(action = NotFoundAction.IGNORE)
     private ProjectSubType projectSubtype;
 
     /**
@@ -182,6 +190,7 @@ public class Project {
      */
     @ManyToOne(fetch = FetchType.LAZY, optional = true)
     @JoinColumn(name = "RESPONSABLE", referencedColumnName = "IDENTIFICACION", nullable = true)
+    @NotFound(action = NotFoundAction.IGNORE)
     private Person responsible;
 
     /**
@@ -378,6 +387,7 @@ public class Project {
      */
     @ManyToOne(fetch = FetchType.LAZY, optional = true)
     @JoinColumn(name = "SUBNIVEL_PROYECTO", referencedColumnName = "SUBNIVEL_PROYECTO", nullable = true)
+    @NotFound(action = NotFoundAction.IGNORE)
     private ProjectSubLevel projectSubLevel;
 
     /**
