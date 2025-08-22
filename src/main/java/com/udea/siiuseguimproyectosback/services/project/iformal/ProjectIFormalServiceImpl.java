@@ -3,6 +3,7 @@ package com.udea.siiuseguimproyectosback.services.project.iformal;
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import com.udea.siiuseguimproyectosback.domain.dto.project.ProjectIFormalDTO;
 import com.udea.siiuseguimproyectosback.domain.entity.project.ProjectIFormal;
@@ -37,7 +38,7 @@ public class ProjectIFormalServiceImpl implements IProjectIFormalService {
 
 	@Override
 	public List<ProjectIFormalDTO> findAll() {
-		return repository.findAll().stream().map(mapper::toDTO).toList(); // 🔹 Devuelve lista de DTOs
+		return repository.findAll().stream().map(mapper::toDTO).collect(Collectors.toList()); // 🔹 Devuelve lista de DTOs
 	}
 
 	@Override

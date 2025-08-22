@@ -10,6 +10,6 @@ import org.springframework.data.repository.query.Param;
 
 public interface IProjectParticipantRepository extends JpaRepository<ProjectParticipant, Long> {
 
-	@Query("SELECT p FROM ProjectParticipant p WHERE p.project.codigo = :projectCode")
+	@Query(value = "SELECT * FROM SIIU_PARTICIPANTE_PROYECTO p WHERE p.PROYECTO = :projectCode",nativeQuery = true)
 	List<ProjectParticipant> findByProjectCode(@Param("projectCode") String projectCode);
 }

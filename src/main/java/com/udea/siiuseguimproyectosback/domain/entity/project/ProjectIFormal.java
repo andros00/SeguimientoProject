@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @Entity
-@Table(name = "SIIU_PROYECTO_DETALLE")
+@Table(name = "SMAP_PROYECTO_IFORMAL")
 public class ProjectIFormal {
 
 	@Id

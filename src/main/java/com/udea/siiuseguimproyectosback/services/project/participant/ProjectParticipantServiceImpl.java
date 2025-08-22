@@ -3,11 +3,14 @@ package com.udea.siiuseguimproyectosback.services.project.participant;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.stereotype.Service;
+
 import com.udea.siiuseguimproyectosback.domain.dto.project.ProjectParticipantDTO;
 import com.udea.siiuseguimproyectosback.domain.entity.project.ProjectParticipant;
 import com.udea.siiuseguimproyectosback.domain.mapper.project.IProjectParticipantMapper;
 import com.udea.siiuseguimproyectosback.persistence.project.IProjectParticipantRepository;
 
+@Service
 public class ProjectParticipantServiceImpl implements IProjectParticipantService {
 
 	private final IProjectParticipantRepository projectParticipantRepository;
