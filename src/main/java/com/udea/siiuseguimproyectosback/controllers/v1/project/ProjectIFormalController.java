@@ -2,7 +2,7 @@ package com.udea.siiuseguimproyectosback.controllers.v1.project;
 
 import java.util.List;
 
-import com.udea.siiuseguimproyectosback.domain.entity.project.ProjectIFormal;
+import com.udea.siiuseguimproyectosback.domain.dto.project.ProjectIFormalDTO;
 import com.udea.siiuseguimproyectosback.services.project.iformal.IProjectIFormalService;
 
 import org.springframework.http.HttpStatus;
@@ -34,30 +34,30 @@ public class ProjectIFormalController {
 	@Operation(summary = "Create a new project formal")
 	@ApiResponse(responseCode = "201", description = "Project formal created")
 	@PostMapping
-	public ResponseEntity<ProjectIFormal> create(@RequestBody ProjectIFormal iFormal) {
-		ProjectIFormal created = iFormalService.create(iFormal);
+	public ResponseEntity<ProjectIFormalDTO> create(@RequestBody ProjectIFormalDTO iFormal) {
+		ProjectIFormalDTO created = iFormalService.create(iFormal);
 		return ResponseEntity.status(HttpStatus.CREATED).body(created);
 	}
 
 	@Operation(summary = "Get all project formal")
 	@ApiResponse(responseCode = "200", description = "List of project formal retrieved")
 	@GetMapping
-	public ResponseEntity<List<ProjectIFormal>> findAll() {
-		List<ProjectIFormal> iFormals = iFormalService.findAll();
+	public ResponseEntity<List<ProjectIFormalDTO>> findAll() {
+		List<ProjectIFormalDTO> iFormals = iFormalService.findAll();
 		return iFormals.isEmpty() ? ResponseEntity.noContent().build() : ResponseEntity.ok(iFormals);
 	}
 
 	@Operation(summary = "Get project iformal by ID")
 	@ApiResponse(responseCode = "200", description = "Project iformal found")
 	@GetMapping("/{id}")
-	public ResponseEntity<ProjectIFormal> findById(@PathVariable Long id) {
+	public ResponseEntity<ProjectIFormalDTO> findById(@PathVariable Long id) {
 		return iFormalService.findById(id).map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
 	}
 
 	@Operation(summary = "Update a project iformal")
 	@ApiResponse(responseCode = "200", description = "Project iformal updated")
 	@PutMapping("/{id}")
-	public ResponseEntity<ProjectIFormal> update(@PathVariable Long id, @RequestBody ProjectIFormal iFormal) {
+	public ResponseEntity<ProjectIFormalDTO> update(@PathVariable Long id, @RequestBody ProjectIFormalDTO iFormal) {
 		return iFormalService.update(id, iFormal).map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
 	}
 
@@ -65,8 +65,6 @@ public class ProjectIFormalController {
 	@ApiResponse(responseCode = "204", description = "Project iformal deleted")
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> delete(@PathVariable Long id) {
-        return iFormalService.delete(id)
-                ? ResponseEntity.noContent().build()
-                : ResponseEntity.notFound().build();
-    }
+		return iFormalService.delete(id) ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
+	}
 }
