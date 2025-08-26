@@ -1,6 +1,7 @@
 package com.udea.siiuseguimproyectosback.controllers.v1.project;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -9,9 +10,14 @@ import com.udea.siiuseguimproyectosback.domain.dto.project.ProjectParticipantDTO
 import com.udea.siiuseguimproyectosback.domain.dto.user.UserSessionDTO;
 import com.udea.siiuseguimproyectosback.services.project.participant.IProjectParticipantService;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -50,78 +56,75 @@ public class ProjectParticipantController {
 				.orElseGet(() -> ResponseEntity.noContent().build());
 	}
 
-//	
-//	
-//	// CREATE
-//	@Operation(summary = "Create a new participant", description = "Registers a new participant for a project", responses = {
-//			@ApiResponse(responseCode = "201", description = "Participant created successfully", content = @Content(schema = @Schema(implementation = ProjectParticipantDTO.class))),
-//			@ApiResponse(responseCode = "400", description = "Invalid input data", content = @Content) })
-//	@PostMapping
-//	public ResponseEntity<ProjectParticipantDTO> createParticipant(@RequestBody ProjectParticipantDTO dto) {
-//		// UserSessionDTO user = session.getCurrentUser(request);
-//		UserSessionDTO user = new UserSessionDTO();
-//		user.setDocumentNumber("43731881");
-//
-//		return Optional.ofNullable(participantService.create(dto, user.getDocumentNumber()))
-//				.map(p -> ResponseEntity.status(HttpStatus.CREATED).body(p))
-//				.orElseGet(() -> ResponseEntity.badRequest().build());
-//	}
-//
-//	// READ ALL
-//	@Operation(summary = "Get all participants", description = "Retrieves all participants associated with the current user", responses = {
-//			@ApiResponse(responseCode = "200", description = "List of participants retrieved", content = @Content(schema = @Schema(implementation = ProjectParticipantDTO.class))),
-//			@ApiResponse(responseCode = "204", description = "No participants found", content = @Content) })
-//	@GetMapping
-//	public ResponseEntity<List<ProjectParticipantDTO>> getAllParticipants() {
-//		// UserSessionDTO user = session.getCurrentUser(request);
-//		UserSessionDTO user = new UserSessionDTO();
-//		user.setDocumentNumber("43731881");
-//
-//		return participantService.findAll(user.getDocumentNumber()).map(ResponseEntity::ok)
-//				.orElseGet(() -> ResponseEntity.noContent().build());
-//	}
-//
-//	// READ BY ID
-//	@Operation(summary = "Get participant by ID", description = "Retrieves details of a participant by its ID", responses = {
-//			@ApiResponse(responseCode = "200", description = "Participant retrieved", content = @Content(schema = @Schema(implementation = ProjectParticipantDTO.class))),
-//			@ApiResponse(responseCode = "404", description = "Participant not found", content = @Content) })
-//	@GetMapping("/{id}")
-//	public ResponseEntity<ProjectParticipantDTO> getParticipantById(@PathVariable Long id) {
-//		// UserSessionDTO user = session.getCurrentUser(request);
-//		UserSessionDTO user = new UserSessionDTO();
-//		user.setDocumentNumber("43731881");
-//
-//		return participantService.findById(id, user.getDocumentNumber()).map(ResponseEntity::ok)
-//				.orElseGet(() -> ResponseEntity.notFound().build());
-//	}
-//
-//	// UPDATE
-//	@Operation(summary = "Update a participant", description = "Updates the information of an existing participant", responses = {
-//			@ApiResponse(responseCode = "200", description = "Participant updated successfully", content = @Content(schema = @Schema(implementation = ProjectParticipantDTO.class))),
-//			@ApiResponse(responseCode = "404", description = "Participant not found", content = @Content) })
-//	@PutMapping("/{id}")
-//	public ResponseEntity<ProjectParticipantDTO> updateParticipant(@PathVariable Long id,
-//			@RequestBody ProjectParticipantDTO dto) {
-//		// UserSessionDTO user = session.getCurrentUser(request);
-//		UserSessionDTO user = new UserSessionDTO();
-//		user.setDocumentNumber("43731881");
-//
-//		return participantService.update(id, dto, user.getDocumentNumber()).map(ResponseEntity::ok)
-//				.orElseGet(() -> ResponseEntity.notFound().build());
-//	}
-//
-//	// DELETE
-//	@Operation(summary = "Delete a participant", description = "Deletes a participant by its ID", responses = {
-//			@ApiResponse(responseCode = "204", description = "Participant deleted successfully", content = @Content),
-//			@ApiResponse(responseCode = "404", description = "Participant not found", content = @Content) })
-//	@DeleteMapping("/{id}")
-//	public ResponseEntity<Void> deleteParticipant(@PathVariable Long id) {
-//		// UserSessionDTO user = session.getCurrentUser(request);
-//		UserSessionDTO user = new UserSessionDTO();
-//		user.setDocumentNumber("43731881");
-//
-//		return participantService.delete(id, user.getDocumentNumber()) ? ResponseEntity.noContent().build()
-//				: ResponseEntity.notFound().build();
-//	}
+	// CREATE
+	@Operation(summary = "Create a new participant", description = "Registers a new participant for a project", responses = {
+			@ApiResponse(responseCode = "201", description = "Participant created successfully", content = @Content(schema = @Schema(implementation = ProjectParticipantDTO.class))),
+			@ApiResponse(responseCode = "400", description = "Invalid input data", content = @Content) })
+	@PostMapping
+	public ResponseEntity<ProjectParticipantDTO> createParticipant(@RequestBody ProjectParticipantDTO dto) {
+		// UserSessionDTO user = session.getCurrentUser(request);
+		UserSessionDTO user = new UserSessionDTO();
+		user.setDocumentNumber("43731881");
+
+		return Optional.ofNullable(participantService.create(dto, user.getDocumentNumber()))
+				.map(p -> ResponseEntity.status(HttpStatus.CREATED).body(p))
+				.orElseGet(() -> ResponseEntity.badRequest().build());
+	}
+
+	// READ ALL
+	@Operation(summary = "Get all participants", description = "Retrieves all participants associated with the current user", responses = {
+			@ApiResponse(responseCode = "200", description = "List of participants retrieved", content = @Content(schema = @Schema(implementation = ProjectParticipantDTO.class))),
+			@ApiResponse(responseCode = "204", description = "No participants found", content = @Content) })
+	@GetMapping
+	public ResponseEntity<List<ProjectParticipantDTO>> getAllParticipants() {
+		// UserSessionDTO user = session.getCurrentUser(request);
+		UserSessionDTO user = new UserSessionDTO();
+		user.setDocumentNumber("43731881");
+
+		return ResponseEntity.ok(participantService.findAll(user.getDocumentNumber()));
+	}
+
+	// READ BY ID
+	@Operation(summary = "Get participant by ID", description = "Retrieves details of a participant by its ID", responses = {
+			@ApiResponse(responseCode = "200", description = "Participant retrieved", content = @Content(schema = @Schema(implementation = ProjectParticipantDTO.class))),
+			@ApiResponse(responseCode = "404", description = "Participant not found", content = @Content) })
+	@GetMapping("/{id}")
+	public ResponseEntity<ProjectParticipantDTO> getParticipantById(@PathVariable Long id) {
+		// UserSessionDTO user = session.getCurrentUser(request);
+		UserSessionDTO user = new UserSessionDTO();
+		user.setDocumentNumber("43731881");
+
+		return participantService.findById(id, user.getDocumentNumber()).map(ResponseEntity::ok)
+				.orElseGet(() -> ResponseEntity.notFound().build());
+	}
+
+	// UPDATE
+	@Operation(summary = "Update a participant", description = "Updates the information of an existing participant", responses = {
+			@ApiResponse(responseCode = "200", description = "Participant updated successfully", content = @Content(schema = @Schema(implementation = ProjectParticipantDTO.class))),
+			@ApiResponse(responseCode = "404", description = "Participant not found", content = @Content) })
+	@PutMapping("/{id}")
+	public ResponseEntity<ProjectParticipantDTO> updateParticipant(@PathVariable Long id,
+			@RequestBody ProjectParticipantDTO dto) {
+		// UserSessionDTO user = session.getCurrentUser(request);
+		UserSessionDTO user = new UserSessionDTO();
+		user.setDocumentNumber("43731881");
+
+		return participantService.update(id, dto, user.getDocumentNumber()).map(ResponseEntity::ok)
+				.orElseGet(() -> ResponseEntity.notFound().build());
+	}
+
+	// DELETE
+	@Operation(summary = "Delete a participant", description = "Deletes a participant by its ID", responses = {
+			@ApiResponse(responseCode = "204", description = "Participant deleted successfully", content = @Content),
+			@ApiResponse(responseCode = "404", description = "Participant not found", content = @Content) })
+	@DeleteMapping("/{id}")
+	public ResponseEntity<Void> deleteParticipant(@PathVariable Long id) {
+		// UserSessionDTO user = session.getCurrentUser(request);
+		UserSessionDTO user = new UserSessionDTO();
+		user.setDocumentNumber("43731881");
+
+		return participantService.delete(id, user.getDocumentNumber()) ? ResponseEntity.noContent().build()
+				: ResponseEntity.notFound().build();
+	}
 
 }

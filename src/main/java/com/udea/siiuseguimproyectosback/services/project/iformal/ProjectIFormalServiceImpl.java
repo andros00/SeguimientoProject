@@ -33,12 +33,12 @@ public class ProjectIFormalServiceImpl implements IProjectIFormalService {
 
 	@Override
 	public Optional<ProjectIFormalDTO> findById(Long id) {
-		return repository.findById(id).map(mapper::toDTO); // 🔹 Devuelve DTO
+		return repository.findById(id).map(mapper::toDTO); 
 	}
 
 	@Override
 	public List<ProjectIFormalDTO> findAll() {
-		return repository.findAll().stream().map(mapper::toDTO).collect(Collectors.toList()); // 🔹 Devuelve lista de DTOs
+		return repository.findAll().stream().map(mapper::toDTO).collect(Collectors.toList()); 
 	}
 
 	@Override
