@@ -59,4 +59,13 @@ public class ProjectIFormalServiceImpl implements IProjectIFormalService {
 			return true;
 		}).orElse(false);
 	}
+	
+	@Override
+    public Optional<ProjectIFormalDTO> findByProjectCode(String projectCode) {
+        return repository.findByProjectCode(projectCode)
+                .map(mapper::toDTO);
+//                .orElseThrow(() -> new ResourceNotFoundException(
+//                        "No se encontró un proyecto con el código: " + projectCode
+//                ));
+    }
 }

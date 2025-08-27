@@ -47,4 +47,13 @@ public interface IProjectIFormalService {
 	 * @return true if deletion was successful, false otherwise
 	 */
 	boolean delete(Long id);
+
+	/**
+	 * Finds a ProjectIFormal by its projectCode.
+	 *
+	 * @param projectCode the projectCode of the ProjectIFormal
+	 * @return an Optional containing the ProjectIFormalDTO if found, otherwise
+	 * 
+	 */
+	Optional<ProjectIFormalDTO> findByProjectCode(String projectCode);
 }
