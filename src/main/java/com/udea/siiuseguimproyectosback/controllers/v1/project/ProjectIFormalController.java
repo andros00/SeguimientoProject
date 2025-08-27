@@ -67,4 +67,9 @@ public class ProjectIFormalController {
 	public ResponseEntity<Void> delete(@PathVariable Long id) {
 		return iFormalService.delete(id) ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
 	}
+	
+    @GetMapping("/code/{projectCode}")
+    public ResponseEntity<ProjectIFormalDTO> getByProjectCode(@PathVariable String projectCode) {
+       return  iFormalService.findByProjectCode(projectCode).map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
+    }
 }
