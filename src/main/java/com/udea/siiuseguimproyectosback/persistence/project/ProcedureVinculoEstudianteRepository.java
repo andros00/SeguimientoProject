@@ -36,14 +36,23 @@ public class ProcedureVinculoEstudianteRepository {
 
 		for (Object[] row : results) {
 			VinculoEstudianteDTO dto = new VinculoEstudianteDTO();
+			System.out.println("****1::::"+row[0]);
 			dto.setIdentificacion((String) row[0]);
+			System.out.println("****2::::"+row[1]);
 			dto.setSelectorPersona((String) row[1]);
+			System.out.println("****3::::"+row[2]);
 			dto.setCodigoFacultad((String) row[2]);
+			System.out.println("****4::::"+row[3]);
 			dto.setNombreFacultad((String) row[3]);
+			System.out.println("****5::::"+row[4]);
 			dto.setCodigoPrograma((String) row[4]);
+			System.out.println("****6::::"+row[5]);
 			dto.setNombrePrograma((String) row[5]);
+			System.out.println("****7::::"+row[6]);
 			dto.setCodigoTipo((String) row[6]);
+			System.out.println("****8::::"+row[7]);
 			dto.setNombreTipoPrograma((String) row[7]);
+			System.out.println("****9::::"+row[9]);
 			dto.setPorcentajeCompletado(row[8] != null ? Double.valueOf(row[8].toString().replace(",", ".")) : null);
 			response.add(dto);
 		}
