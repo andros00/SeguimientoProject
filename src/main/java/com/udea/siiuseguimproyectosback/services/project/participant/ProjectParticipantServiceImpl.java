@@ -8,16 +8,19 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 
 import com.udea.siiuseguimproyectosback.domain.dto.project.ProjectParticipantDTO;
+import com.udea.siiuseguimproyectosback.domain.dto.project.VinculoEstudianteDTO;
 import com.udea.siiuseguimproyectosback.domain.entity.project.ProjectIFormal;
 import com.udea.siiuseguimproyectosback.domain.entity.project.ProjectParticipant;
 import com.udea.siiuseguimproyectosback.domain.mapper.project.IProjectParticipantMapper;
 import com.udea.siiuseguimproyectosback.persistence.project.IProjectParticipantRepository;
+import com.udea.siiuseguimproyectosback.persistence.project.ProcedureVinculoEstudianteRepository;
 
 @Service
 public class ProjectParticipantServiceImpl implements IProjectParticipantService {
 
 	private final IProjectParticipantRepository projectParticipantRepository;
 	private final IProjectParticipantMapper participantMapper;
+	private final ProcedureVinculoEstudianteRepository procedureRepository;
 
 	/**
 	 * Constructs an instance of {@link ProjectParticipantServiceImpl}.
@@ -30,15 +33,27 @@ public class ProjectParticipantServiceImpl implements IProjectParticipantService
 	 */
 
 	public ProjectParticipantServiceImpl(IProjectParticipantRepository projectParticipantRepository,
-			IProjectParticipantMapper participantMapper) {
+			IProjectParticipantMapper participantMapper, ProcedureVinculoEstudianteRepository procedureRepository) {
 		this.projectParticipantRepository = projectParticipantRepository;
 		this.participantMapper = participantMapper;
+		this.procedureRepository = procedureRepository;
 	}
 
 	@Override
 	public Optional<List<ProjectParticipantDTO>> findByProjectCode(String projectCode, String documentNumber) {
 		// Validaciones q nos puedan hacer falta
 		List<ProjectParticipant> participants = projectParticipantRepository.findByProjectCode(projectCode);
+
+		participants.stream().forEach(participant -> {
+
+			VinculoEstudianteDTO vinculo = procedureRepository
+					.leerVinculoEstudiante(participant.getResponsible().getId());
+
+			participant.setPORCENTAJE_COMPLETADO(vinculo.getPorcentajeCompletado());
+			participant.setNOMBRE_PROGRAMA(vinculo.getNombrePrograma());
+
+		});
+
 		return participants.isEmpty() ? Optional.empty() : Optional.of(participantMapper.toDTO(participants));
 	}
 
@@ -49,7 +64,8 @@ public class ProjectParticipantServiceImpl implements IProjectParticipantService
 
 	@Override
 	public List<ProjectParticipantDTO> findAll(String documentNumber) {
-		return projectParticipantRepository.findAll().stream().map(participantMapper::toDTO).collect(Collectors.toList());
+		return projectParticipantRepository.findAll().stream().map(participantMapper::toDTO)
+				.collect(Collectors.toList());
 	}
 
 	@Override

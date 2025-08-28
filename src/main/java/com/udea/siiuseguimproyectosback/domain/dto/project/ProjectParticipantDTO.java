@@ -10,7 +10,7 @@ public class ProjectParticipantDTO {
     private String project;
     private String fullName;
     private String responsible;
-    private List<ProjectParticipantRolDTO> projectParticipantRole;
+    private ProjectParticipantRolDTO projectParticipantRole;
     private Long group;
     private Integer dedicationMonths;
     private Integer dedicationHours;
@@ -18,4 +18,6 @@ public class ProjectParticipantDTO {
     private Integer dedicationHoursPlan;
     private Long supportedProgramCode;
     private Double academicProgPercentage;
+    private String NOMBRE_PROGRAMA;
+    private Double PORCENTAJE_COMPLETADO;
 }

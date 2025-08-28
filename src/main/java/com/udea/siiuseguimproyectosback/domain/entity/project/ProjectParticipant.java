@@ -165,4 +165,7 @@ public class ProjectParticipant {
 
     @Column(name = "CONFIRMADO_CONVENIO")
     private Integer confirmedAgreement;
+    
+    private String NOMBRE_PROGRAMA;
+    private Double PORCENTAJE_COMPLETADO;
 }
