@@ -7,4 +7,9 @@ import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
 public interface IProjectParticipantRolMapper extends IEntityMapper<ProjectParticipantRolDTO, ProjectParticipantRol> {
+
+	ProjectParticipantRolDTO toDto(ProjectParticipantRol projectParticipantRol);
+
+	ProjectParticipantRol toEntity(ProjectParticipantRolDTO dto);
+
 }
