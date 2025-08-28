@@ -46,11 +46,15 @@ public class ProjectParticipantServiceImpl implements IProjectParticipantService
 
 		participants.stream().forEach(participant -> {
 
+			
+			
+			
 			VinculoEstudianteDTO vinculo = procedureRepository
 					.leerVinculoEstudiante(participant.getResponsible().getId());
+			
 
-			participant.setPORCENTAJE_COMPLETADO(vinculo.getPorcentajeCompletado());
-			participant.setNOMBRE_PROGRAMA(vinculo.getNombrePrograma());
+			participant.setPORCENTAJE_COMPLETADO(vinculo.getPorcentajeCompletado()!=null?vinculo.getPorcentajeCompletado():0);
+			participant.setNOMBRE_PROGRAMA(vinculo.getNombrePrograma()!=null?vinculo.getNombrePrograma():"");
 
 		});
 
