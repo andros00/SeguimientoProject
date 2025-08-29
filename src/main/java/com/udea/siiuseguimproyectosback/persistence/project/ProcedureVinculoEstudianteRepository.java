@@ -28,7 +28,7 @@ public class ProcedureVinculoEstudianteRepository {
 		query.setParameter(1, identificacion);
 
 		// Parámetro OUT (cursor)
-		query.registerStoredProcedureParameter(2, VinculoEstudiante.class, ParameterMode.REF_CURSOR);
+		query.registerStoredProcedureParameter(2, void.class, ParameterMode.REF_CURSOR);
 
 		query.execute();
 
