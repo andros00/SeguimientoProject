@@ -69,10 +69,10 @@ public class ProjectParticipant {
     @Column(name = "FECHA_FIN")
     private Date endDate;
 
-    @OneToMany(fetch = FetchType.LAZY, orphanRemoval = true)
-    @JoinColumn(name = "ROL_PARTICIPANTE_PROYECTO", referencedColumnName = "IDENTIFICADOR")
+    @ManyToOne(fetch = FetchType.LAZY, optional = true)
+    @JoinColumn(name = "ROL_PARTICIPANTE_PROYECTO", referencedColumnName = "IDENTIFICADOR", nullable = true)
     @NotFound(action = NotFoundAction.IGNORE)
-    private List<ProjectParticipantRol> projectParticipantRole;
+    private ProjectParticipantRol projectParticipantRole;
 
     @Column(name = "INSTITUCION")
     private Long institution;
