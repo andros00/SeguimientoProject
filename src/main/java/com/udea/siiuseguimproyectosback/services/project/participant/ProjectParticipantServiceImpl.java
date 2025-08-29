@@ -44,19 +44,19 @@ public class ProjectParticipantServiceImpl implements IProjectParticipantService
 		// Validaciones q nos puedan hacer falta
 		List<ProjectParticipant> participants = projectParticipantRepository.findByProjectCode(projectCode);
 
-		participants.stream().forEach(participant -> {
-
-			
-			
-			
-			VinculoEstudianteDTO vinculo = procedureRepository
-					.leerVinculoEstudiante(participant.getResponsible().getId());
-			
-
-			participant.setPORCENTAJE_COMPLETADO(vinculo.getPorcentajeCompletado()!=null?vinculo.getPorcentajeCompletado():0);
-			participant.setNOMBRE_PROGRAMA(vinculo.getNombrePrograma()!=null?vinculo.getNombrePrograma():"");
-
-		});
+//		participants.stream().forEach(participant -> {
+//
+//			
+//			
+//			
+//			VinculoEstudianteDTO vinculo = procedureRepository
+//					.leerVinculoEstudiante(participant.getResponsible().getId());
+//			
+//
+//			participant.setPORCENTAJE_COMPLETADO(vinculo.getPorcentajeCompletado()!=null?vinculo.getPorcentajeCompletado():0);
+//			participant.setNOMBRE_PROGRAMA(vinculo.getNombrePrograma()!=null?vinculo.getNombrePrograma():"");
+//
+//		});
 
 		return participants.isEmpty() ? Optional.empty() : Optional.of(participantMapper.toDTO(participants));
 	}
